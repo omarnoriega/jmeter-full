@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jmeter-5-4-1
+  labels:
+    app: jmeter-5-4-1
+spec:
+  strategy:
+    type: Recreate
+  containers:
+    - image: noriegadocker/jmeter-full:alpha
+      name: jmeter-5-4-1
+      ports:
+        - containerPort: 22
+      env:
+       - name: TZ
+         value: "America/Bogota"  
+      volumeMounts:
+        - name: jmeter-5-4-1-volume
+          mountPath: /load_test
+          subPath: "load_test"
+      volumes:
+        - name: jmeter-5-4-1-volume
+          configMap:
+          name: jmeter-5-4-1-config      

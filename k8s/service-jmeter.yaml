@@ -1,0 +1,19 @@
+##################
+# Loadbalancer
+##################
+apiVersion: v1
+kind: Service
+metadata:
+  name: jmeter-5-4-1-svc
+  labels:
+    app: jmeter-5-4-1
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 22
+      name: ssh
+      targetPort: 22
+      protocol: TCP
+  selector:
+    app: jmeter-5-4-1
+---
