@@ -19,7 +19,7 @@ RUN service ssh start
 EXPOSE 22
 CMD ["/usr/sbin/sshd","-D"]
 
-RUN mkdir /jmeter
+RUN cd / && mkdir /jmeter
 COPY apache-jmeter-5.4.1.zip /jmeter
 RUN cd /jmeter/ \
     && unzip apache-jmeter-5.4.1.zip \
@@ -31,4 +31,5 @@ ENV JMETER_HOME /jmeter/apache-jmeter-5.4.1/
 ENV PATH $JMETER_HOME/bin:$PATH
 
 RUN cd / && mkdir /jmx
-COPY request-get.jmx /jmx
+COPY docs/request-get-erp.jmx /jmx
+COPY docs/request-get.jmx /jmx

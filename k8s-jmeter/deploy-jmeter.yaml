@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
       - name: jmeter-5-4-1
-        image: noriegadocker/jmeter-full:alpha
+        image: noriegadocker/jmeter-full:latest
         ports:
         - containerPort: 22
         env:
