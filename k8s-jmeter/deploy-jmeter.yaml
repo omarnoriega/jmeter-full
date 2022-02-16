@@ -4,9 +4,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: jmeter-5-4-1-config
+  name: jmeter-alpha-config
   labels:
-    app: jmeter-5-4-1
+    app: jmeter-alpha
 data:
   load_test: |
     #!/bin/bash
@@ -21,34 +21,32 @@ data:
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
-  name: jmeter-5-4-1
+  name: jmeter-alpha
   labels:
-    app: jmeter-5-4-1
+    app: jmeter-alpha
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: jmeter-5-4-1
+      app: jmeter-alpha
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: jmeter-5-4-1 
+        app: jmeter-alpha
     spec:
       containers:
-      - name: jmeter-5-4-1
-        image: noriegadocker/jmeter-full:latest
-        ports:
-        - containerPort: 22
+      - name: jmeter-alpha
+        image: noriegadocker/jmeter-full:alpha
         env:
         - name: TZ
           value: "America/Bogota"  
         volumeMounts:
-        - name: jmeter-5-4-1-volume
+        - name: jmeter-alpha-volume
           mountPath: /load_test
           subPath: "load_test"  
       volumes:
-      - name: jmeter-5-4-1-volume
+      - name: jmeter-alpha-volume
         configMap:
-         name: jmeter-5-4-1-config
+         name: jmeter-alpha-config
